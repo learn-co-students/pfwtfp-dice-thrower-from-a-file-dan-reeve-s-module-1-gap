@@ -10,44 +10,43 @@
 
 Object Orientation (OO) is a powerful technique that keeps code easy to reason
 about. It wraps data and behaviors into little "cells." This makes code that's
-easier to understand and maintain. As any human knows, many specialized cells
-collaborating can produce an amazing outcome (you, for example).
+easier to understand and maintain because we only have to reason about what's
+going on inside of a tiny little "cell." As any human knows, many specialized
+cells working together can produce an amazing outcome (you, for example).
 
 Most OO instruction focuses on building classes that represent or mimic things
-in the real world: `Die`, a `Dog`, or a `DiceRoller`. In this lesson we'll also
-see that we can make classes that represent other less-tangible things like
-processes, policies, strategies for solving problems or, as we'll see in this
-lesson, things we wish we wish a "dumb" file could tell us about the data it
-holds.
+in the real world: `Die`, a `Dog`, or a `DiceRoller`. With practice, you'll see
+how you can make classes that represent other less-tangible things like
+processes, policies, strategies for solving problems.
+
+In this lesson we'll increase the intelligence of a plain old [CSV] ("comma
+separated values") data file by "wrapping" it in a class.  It's kinda like
+putting a human in mecha power armor (without the cool) intro music: it's still
+an ordinary thing inside, but it's surrounded **awesome**.
+
+![Mecha Manga 4Eva: Robotech](https://media.giphy.com/media/r1UKKfxA5riJq/giphy.gif)
 
 Before we can power up files with the power of OO, we need to review some facts
 about how programs work with data files.
 
-## Read Data from a file
+## Read Data From a File
 
 There are many types of files that programming languages can read. Some are
 written in binary: 1's and 0's that humans can't read. Files like Word docs,
-JPGs, GIFs, and music files are all binary files.
+JPGs, GIFs, and music files are all _binary_ files.
 
-Other types of files, like Ruby source or a text file can be read by humans _as
-well as computers_. We call those files "plain text" files.
+Other types of files, like Ruby source or a text file, can be read by humans
+_as well as computers_. We call those files "plain text" files.
 
 So any file that _both_ humans and computers can read will have to be in plain
-text. But for a computer to read a data file the data needs to be regular and
+text. But for a computer to read a data file, the data needs to be regular and
 predictable. The content must follow a _format_. It must be _structured_.
 Consider the difference between the body of an email and an HTML `<table>`. The
 email body has no regular structure, but the HTML `<table>` does!
 
-HTML is a good example of a _format_ it explains what bits of text can follow
-other bits of text. That's why it's possible for a computer to validate HTML.
-The file's contents should follow the promise of looking like the HTML format.
-JSON files should follow the promise of looking like the JSON format.
-
-The [CSV] format is used to store data that both humans and computers can use.
-It acts a bit like a plain-text database. JSON files are a very common way to
-share information. While executives might speak Excel, Excel can be exported to
-CSV, and languages like Ruby, JavaScript, Python, and Java **all**  know how to
-speak CSV.
+HTML is a good example of a _format_. It explains what bits of text can follow
+other bits of text. That's why it's possible for a computer to validate HTML or
+for an HTML processing library like `nokogiri` to find elements.
 
 Here's a sample of some CSV data:
 
@@ -57,32 +56,49 @@ Here's a sample of some CSV data:
 3,Max,6,"5,3"
 ```
 
-Each row (a sequence of data split on `\n`) is made up of fields which are
-bounded by `,`. The first field seems to be an `id`, the second a name, the
-third a constant integer, and the fourth a grouping surrounded by `"` and
-internally divided into sub-fields based on a `,` again. We have a human- and
-computer-readable document that shows regularity in structure. Its structure
-follows the CSV format.
+The [CSV] _format_ is used to store data that both humans and computers can
+use.  It acts like a plain-text database. CSV files are a very common way to
+share information. While executives might work with binary Excel files, Excel
+files can be exported to CSV, and languages like Ruby, JavaScript, Python, and
+Java **all**  know how to process CSV.
+
+Each row ("file contents `split` on `\n`") is made up of fields which are
+separated by `,` ("each row `split` on `,`"). The first field seems to be an
+`id`, the second a name, the third a constant integer, and the fourth a
+grouping surrounded by `"` and internally divided into sub-fields based on a
+`,` again.
+
+[CSV] doesn't say which data has to come first or second: just that it's
+divided into rows by `\n` and the fields are separated by commas. We could have
+put the name first or the id looking thing last. Both would have been valid
+CSV. We'll explain the specifics of this file as we get into the lab work
+below.
 
 ## Parse Data from a file
 
-We can use the [CSV] ("comma separated values") library to interpret the
-plain-text file read from disk according to the "comma-separated values"
-format.
+We can use Ruby's built-in [CSV] library to interpret the `.csv` file according
+to the "comma-separated values" format.
 
 In this lab you'll create a class that manages a CSV file. It will turn "data
 from the disk" into "rows of CSV-foratted data." Furthermore, the class will
-provide analysis of the data it possesses.
+provide analysis of the data it possesses (augmenting the powerless file like
+how a mecha armor augments a green-haired anime hero!).
+
+![Voltron is a wrapping class to humans](https://media.giphy.com/media/niNOWsn2lTxXq/giphy.gif)
+
+_The lion mechs are "wrappers" to humans in this analogy_
 
 ## Create Object-Oriented Program
 
 ### Scenario
 
-Our Department of Luck Studies is looking for a new President. To do this, they
-had candidates throw many dice rolls in hopes of finding the luckiest
-individual. _Unluckily_ the database they were storing this information in
-crashed and lost most of its records.  Our dedicated IT team, however, managed
-to save 100 of the trials to the file `trials.csv`.
+Let's suppose we're working at a certain magical high school of wizard-like
+studiess.  Our Department of Luck Studies is looking for a new President. To do
+this, they had candidates throw many dice rolls in hopes of finding the
+luckiest individual. _Unluckily_ the database they were storing this
+information in crashed and lost most of its records.  Our dedicated IT team,
+assisted by Unix magic and the powerful spells `grep` and `awk`, however,
+managed to save 100 of the trials to the file `trials.csv`.
 
 The rows in the CSV represent:
 
@@ -92,8 +108,12 @@ The rows in the CSV represent:
 
 1. An `id` for the trial
 2. A participant name (a candidate)
-3. The maximum number of pips on the die thrown
+3. The maximum number of pips on the die thrown in the next field
 4. The results of the candidate's throw. Multiple die are separated by a `,`
+
+So the line above says, in English, "In trial 1, Arya threw six sided dice.
+There were two of them (splitting the last field and counting the numbers),
+their pips were 4 and 3 leading to a total pip-value of `7`."
 
 ### First Release: Learn About the Data
 
@@ -105,7 +125,8 @@ The tests will guide you in creating a class called `LuckAnalyzer.rb` in
 * `LuckAnalyzer` class will:
   * Be initialized by being passed the name of the file to read
   * `initialize`
-    * Will build a file path from the file name passed in
+    * Will build a file path from the file name passed in (starter code is
+      provided)
     * Will "parse" the data in the file at the file path according to the CSV
       format using the Ruby [CSV] library method that reads in a file and
       converts the rows to an `Array` of `Arrays`. Consult the
