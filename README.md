@@ -169,13 +169,14 @@ The DoLS would like for you to determine the following:
       * C has U, U, U, U, U, U, U, U, U, L, U, L => [L, L, U] => 66%
       * "A" is the luckiest!
 
-#### Build It!
-
 The (DoLS) famously asks for new features often, so we want to build this using
 an OO. DoLS have certified that the current code of `Die` and `DieRoller` are
 very lucky. They have requested, and paid you handsomely, to update the
 existing classes (provided in `lib/`). The trick is that _new_ features can't
 break _existing_ functionality. They have given you an existing test suite.
+
+> You can run the full test suite (including your work to satisfy
+> `luck_analyzer_spec`, by running `rspec` from the Terminal or `learn`).
 
 * Update `Die` so that:
   * It can be initialized with a permanent value. When a set value is present, all
@@ -186,8 +187,8 @@ break _existing_ functionality. They have given you an existing test suite.
 
 * Update `DieRoller` so that:
   * It can be initialized with an `Array` of `Die`
-  * It has a `lucky?` method to return `true` if the pips total 7, `false`
-    otherwise
+  * It has a `lucky?` method to return `true` if the `Array` of `Die`s' pips
+    total 7, `false` otherwise
 
 * Update `LuckAnalyzer`
   * Add a method called `luckiest` to return the luckiest participant as
