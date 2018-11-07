@@ -46,21 +46,3 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
-
-# To parse and test an HTML file, add 'nokogiri' to Gemfile and uncomment these methods
-# def html_file_contents
-#   File.read('./index.html')
-# end
-#
-# def parsed_html
-#   Nokogiri::HTML(html_file_contents) do |config|
-#     config.strict.dtdload.dtdvalid.noblanks
-#   end
-# end
-
-# To parse and test a CSS file, add 'css_parser' to Gemfile and uncomment this method
-# def parsed_css
-#   parser = CssParser::Parser.new
-#   parser.load_uri!('./style.css')
-#   parser
-# end
