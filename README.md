@@ -222,6 +222,10 @@ keeping the old tests happy while adding new ones! Congratulations!
 We also guided you through a process of thinking about how to make small
 "cells" of objects collaborate together to make getting answers simpler.
 
+In subsequent lessons we'll be taking a solution to this problem and
+refactor the code to make it concise, clear, and beautiful. You won't want to
+miss it!
+
 ## Resources
 
 - [CSV]
