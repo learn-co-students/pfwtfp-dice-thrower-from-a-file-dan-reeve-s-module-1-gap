@@ -93,11 +93,11 @@ _The lion mechs are "wrappers" to humans in this analogy_
 ### Scenario
 
 Let's suppose we're working at a certain magical high school of wizard-like
-studiess.  Our Department of Luck Studies is looking for a new President. To do
-this, they had candidates throw many dice rolls in hopes of finding the
-luckiest individual. _Unluckily_ the database they were storing this
-information in crashed and lost most of its records.  Our dedicated IT team,
-assisted by Unix magic and the powerful spells `grep` and `awk`, however,
+studiess.  Our Department of Luck Studies (DoLS) is looking for a new
+President. To do this, they had candidates throw many dice rolls in hopes of
+finding the luckiest individual. _Unluckily_ the database they were storing
+this information in crashed and lost most of its records.  Our dedicated IT
+team, assisted by Unix magic and the powerful spells `grep` and `awk`, however,
 managed to save 100 of the trials to the file `trials.csv`.
 
 The rows in the CSV represent:
@@ -117,13 +117,14 @@ their pips were 4 and 3 leading to a total pip-value of `7`."
 
 ### First Release: Learn About the Data
 
-We want to analyze this file for the Department of Luck studies.
+We want to analyze this file for the DoLS.
 
 The tests will guide you in creating a class called `LuckAnalyzer.rb` in
 `lib/luck_analyzer.rb`.
 
 * `LuckAnalyzer` class will:
-  * Be initialized by being passed the name of the file to read
+  * Be initialized by being passed the name of the file to read. It must also
+    end in `.csv`. Else we `raise` an `ArgumentError`
   * `initialize`
     * Will build a file path from the file name passed in (starter code is
       provided)
@@ -134,14 +135,26 @@ The tests will guide you in creating a class called `LuckAnalyzer.rb` in
     * The parsed CSV data should be available through a reader called
       `csv_data`
   * Instance methods
-    * `common_number_of_trials`: Because the database crashed, we're not sure
+    * `#common_number_of_trials`: Because the database crashed, we're not sure
       how many trials are common to the participants. We need this class to
       tell us the minimum common number of trials. For example: [A, A, A, A, B,
       B, B, B, B, C, C, C] has a common trial of `3` since C has the fewest.
+    * `#least_trials_candidate`: Which candidate had the least, and thus
+      common, number of trials? Returns a `String`
+    * `#most_trials_candidate`: Which candidate had the most trials? Returns a
+      `String`
+
+> **TYPOGRAPHICAL NOTE**: Developer documentation uses `#methodname` to show that
+> `methodname` is an instance method. They use `::methodname` to denote a class
+> method. For trigonometry equations there's `Math::sin`, for instances of
+> `Mankind` there's `Mankind#sin`.
+
+Use the command `rspec spec/luck_analyzer_spec.rb` from the terminal and get
+all of these tests passing.
 
 ### Second Release: Who is the Luckiest?
 
-The Department of Luck Studies would like for you to determine the following:
+The DoLS would like for you to determine the following:
 
 1. "Who is the luckiest candidate?" Where:
   1. "Lucky" is defined as having had a dice roll where the total pips is equal
@@ -150,18 +163,19 @@ The Department of Luck Studies would like for you to determine the following:
      size `common_number_of_trials`. We should take as many "lucky" rolls as
      possible
     * Example
-     * Gven a common size of 3 where "L" means "Lucky" and "U" means "Unlucky":
+     * Gven a common size of 3 (where "L" means "Lucky" and "U" means "Unlucky"):
       * A has L, L, L, L => [L, L, L] => 3/3 => 100%
       * B has U, U, U, L => [L, U, U] => 1/3 => 33%
       * C has U, U, U, U, U, U, U, U, U, L, U, L => [L, L, U] => 66%
+      * "A" is the luckiest!
 
 #### Build It!
 
-The Department of Luck Studies (DoLS) famously asks for new features often, so
-we want to build this using an OO. DoLS have certified that the current
-implementations of `Die` and `DieRoller` are properly lucky. They have
-requested, and paid you handsomely, to update the existing classes (provided in
-`lib/`). The trick is that _new_ features can't break _existing_ functionality.
+The (DoLS) famously asks for new features often, so we want to build this using
+an OO. DoLS have certified that the current code of `Die` and `DieRoller` are
+very lucky. They have requested, and paid you handsomely, to update the
+existing classes (provided in `lib/`). The trick is that _new_ features can't
+break _existing_ functionality. They have given you an existing test suite.
 
 * Update `Die` so that:
   * It can be initialized with a permanent value. When a set value is present, all
