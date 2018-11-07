@@ -170,7 +170,7 @@ The DoLS would like for you to determine the following:
       * "A" is the luckiest!
 
 The (DoLS) famously asks for new features often, so we want to build this using
-an OO. DoLS have certified that the current code of `Die` and `DieRoller` are
+an OO. DoLS have certified that the current code of `Die` and `DiceRoller` are
 very lucky. They have requested, and paid you handsomely, to update the
 existing classes (provided in `lib/`). The trick is that _new_ features can't
 break _existing_ functionality. They have given you an existing test suite.
@@ -185,14 +185,21 @@ break _existing_ functionality. They have given you an existing test suite.
  * It provides a `#random_roll?` method which returns `true` if the `Die`'s
    roll value is set randomly and `false` if not.
 
-* Update `DieRoller` so that:
+* Update `DiceRoller` so that:
   * It can be initialized with an `Array` of `Die`
+  * If it is initialized with an `Array` of `Die`, when the generate_set
+    method is called, it should return the `Array` of the `roll` values of the
+    `Die`
   * It has a `lucky?` method to return `true` if the `Array` of `Die`s' pips
     total 7, `false` otherwise
 
 * Update `LuckAnalyzer`
   * Add a method called `luckiest` to return the luckiest participant as
-    defined above. To do so you will need to follow this pseudocoded algorithm
+    defined above. The DoLS would like the output to be of the form:
+    `candidate_name (lucky_percentage[rounded to the nearest whole number])`
+    e.g. `"Perry Hotter (43%)"`
+
+To do so you will need to follow this pseudocoded algorithm
 
 ```text
 For each row of CSV data
@@ -216,5 +223,8 @@ We also guided you through a process of thinking about how to make small
 "cells" of objects collaborate together to make getting answers simpler.
 
 ## Resources
+
+- [CSV]
+
 
 [CSV]: https://ruby-doc.org/stdlib-2.0.0/libdoc/csv/rdoc/CSV.html
