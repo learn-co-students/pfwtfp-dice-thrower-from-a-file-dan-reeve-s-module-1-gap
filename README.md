@@ -137,8 +137,24 @@ The tests will guide you in creating a class called `LuckAnalyzer.rb` in
   - Instance methods
     - `#common_number_of_trials`: Because the database crashed, we're not sure
       how many trials are common to the participants. We need this class to
-      tell us the minimum common number of trials. For example: [A, A, A, A, B,
-      B, B, B, B, C, C, C] has a common trial of `3` since C has the fewest.
+      tell us the minimum _common_ number of trials.
+      ```csv
+        1,Arya,6,"1,3"
+        2,Arya,6,"2,3"
+        3,Arya,6,"3,3"
+        4,Arya,6,"4,3"
+        5,Byron,6,"1,3"
+        6,Byron,6,"2,3"
+        7,Byron,6,"3,3"
+        8,Byron,6,"4,3"
+        9,Byron,6,"5,3"
+        10,Carl,6,"1,3"
+        11,Carl,6,"2,3"
+        12,Carl,6,"3,3"
+      ```
+      In this CSV file, we have a `common_number_of_trials` of `3`. "Carl" has the
+      fewest trials and so, if we want to compare candidates equally as a
+      percentage, we need the denominator to be **`3`**
     - `#least_trials_candidate`: Which candidate had the least, and thus
       common, number of trials? Returns a `String`
     - `#most_trials_candidate`: Which candidate had the most trials? Returns a
