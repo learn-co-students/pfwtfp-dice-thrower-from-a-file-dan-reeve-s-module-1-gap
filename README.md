@@ -147,7 +147,7 @@ The tests will guide you in creating a class called `LuckAnalyzer.rb` in
         6,Byron,6,"2,3"
         7,Byron,6,"3,3"
         8,Byron,6,"4,3"
-        9,Byron,6,"5,3"
+        9,Byron,6,"5,2"
         10,Carl,6,"1,3"
         11,Carl,6,"2,3"
         12,Carl,6,"3,3"
@@ -177,13 +177,35 @@ The DoLS would like for you to determine the following:
     to `7`
 3.  "Luckiest" is defined as having the most "lucky" rolls within a set of
     size `common_number_of_trials`. We should take as many "lucky" rolls as
-    possible
-    - Example
-    - Gven a common size of 3 (where "L" means "Lucky" and "U" means "Unlucky"):
-    - A has L, L, L, L => [L, L, L] => 3/3 => 100%
-    - B has U, U, U, L => [L, U, U] => 1/3 => 33%
-    - C has U, U, U, U, U, U, U, U, U, L, U, L => [L, L, U] => 66%
-    - "A" is the luckiest!
+    possible.
+
+### Example
+
+```csv
+1,Arya,6,"1,3"
+2,Arya,6,"2,3"
+3,Arya,6,"3,3"
+4,Arya,6,"4,3"
+5,Byron,6,"1,3"
+6,Byron,6,"2,3"
+7,Byron,6,"3,3"
+8,Byron,6,"4,3"
+9,Byron,6,"5,2"
+10,Carl,6,"1,3"
+11,Carl,6,"2,3"
+12,Carl,6,"3,3"
+```
+
+* As demonstrated earlier, the `common_number_of_trials`  is `3`.
+  * Arya has 4 trials, 1 of them is "lucky." We will put as many of her lucky
+    trials into 3 available slots. In the end she has 1/3 "lucky" rolls giving
+    her a 33% lucky rate (rounded).
+  * Byron has 5 trials, 2 of them are "lucky." We will put as many of his lucky
+    trials into the 3 available slots. In the end he has 2/3 "lucky" rolls
+    giving him a 67% lucky rate (rounded).
+  * Carl has 3 trials, 0 of them are "lucky." We will put as many of his lucky
+    trials into the 3 available slots. In the end he has 0/3 "lucky" rolls
+    giving him a 0% lucky rate.
 
 The (DoLS) famously asks for new features often, so we want to build this using
 an OO. DoLS have certified that the current code of `Die` and `DiceRoller` are
