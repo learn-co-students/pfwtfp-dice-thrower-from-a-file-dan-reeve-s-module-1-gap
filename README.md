@@ -199,8 +199,6 @@ break _existing_ functionality. They have given you an existing test suite.
   - It can be initialized with a permanent value. When a set value is present, all
     calls to the `#roll` instance method return the set value. The permanent
     value should be accessible via a call to `set_value`
-  - It provides a `#random_roll?` method which returns `true` if the `Die`'s
-    roll value is set randomly and `false` if not.
 
 - Update `DiceRoller` so that:
 

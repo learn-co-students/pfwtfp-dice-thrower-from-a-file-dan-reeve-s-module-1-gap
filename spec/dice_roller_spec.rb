@@ -40,7 +40,7 @@ describe 'DiceRoller' do
       expect { DiceRoller.new(6, HARD_SET_VALUE, [1, 1])}.not_to raise_error
     end
 
-    it 'has a #roll method that only returns the hard-set value' do
+    it 'has a generate_set method that honors hard-coded values for Die that it manages' do
       dice_values = @dr1.generate_set
       expect(dice_values).to eq([2,3])
     end
