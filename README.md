@@ -21,7 +21,7 @@ processes, policies, strategies for solving problems.
 
 In this lesson we'll increase the intelligence of a plain old [CSV] ("comma
 separated values") data file by "wrapping" it in a class. It's kinda like
-putting a human in mecha power armor (without the cool) intro music: it's still
+putting a human in mecha power armor (without the cool intro music): it's still
 an ordinary thing inside, but it's surrounded by **awesome**.
 
 ![Mecha Manga 4Eva: Robotech](https://media.giphy.com/media/r1UKKfxA5riJq/giphy.gif)
