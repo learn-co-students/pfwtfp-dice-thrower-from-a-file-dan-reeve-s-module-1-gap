@@ -20,7 +20,7 @@ how you can make classes that represent other less-tangible things like
 processes, policies, strategies for solving problems.
 
 In this lesson we'll increase the intelligence of a plain old [CSV] ("comma
-separated values") data file by "wrapping" it in a class.  It's kinda like
+separated values") data file by "wrapping" it in a class. It's kinda like
 putting a human in mecha power armor (without the cool) intro music: it's still
 an ordinary thing inside, but it's surrounded by **awesome**.
 
@@ -57,10 +57,10 @@ Here's a sample of some CSV data:
 ```
 
 The [CSV] _format_ is used to store data that both humans and computers can
-use.  It acts like a plain-text database. CSV files are a very common way to
+use. It acts like a plain-text database. CSV files are a very common way to
 share information. While executives might work with binary Excel files, Excel
 files can be exported to CSV, and languages like Ruby, JavaScript, Python, and
-Java **all**  know how to process CSV.
+Java **all** know how to process CSV.
 
 Each row ("file contents `split` on `\n`") is made up of fields which are
 separated by `,` ("each row `split` on `,`"). The first field seems to be an
@@ -93,10 +93,10 @@ _The lion mechs are "wrappers" to humans in this analogy_
 ### Scenario
 
 Let's suppose we're working at a certain magical high school of wizard-like
-studiess.  Our Department of Luck Studies (DoLS) is looking for a new
+studies. Our Department of Luck Studies (DoLS) is looking for a new
 President. To do this, they had candidates throw many dice rolls in hopes of
-finding the luckiest individual. _Unluckily_ the database they were storing
-this information in crashed and lost most of its records.  Our dedicated IT
+finding the luckiest individual. _Unluckily_, the database they were storing
+this information in crashed and lost most of its records. Our dedicated IT
 team, assisted by Unix magic and the powerful spells `grep` and `awk`, however,
 managed to save 100 of the trials to the file `trials.csv`.
 
@@ -106,10 +106,10 @@ The rows in the CSV represent:
 1,Arya,6,"4,3"
 ```
 
-1. An `id` for the trial
-2. A participant name (a candidate)
-3. The maximum number of pips on the die thrown in the next field
-4. The results of the candidate's throw. Multiple die are separated by a `,`
+1.  An `id` for the trial
+2.  A participant name (a candidate)
+3.  The maximum number of pips on the die thrown in the next field
+4.  The results of the candidate's throw. Multiple die are separated by a `,`
 
 So the line above says, in English, "In trial 1, Arya threw six sided dice.
 There were two of them (splitting the last field and counting the numbers),
@@ -122,26 +122,26 @@ We want to analyze this file for the DoLS.
 The tests will guide you in creating a class called `LuckAnalyzer.rb` in
 `lib/luck_analyzer.rb`.
 
-* `LuckAnalyzer` class will:
-  * Be initialized by being passed the name of the file to read. It must also
+- `LuckAnalyzer` class will:
+  - Be initialized by being passed the name of the file to read. It must also
     end in `.csv`. Else we `raise` an `ArgumentError`
-  * `initialize`
-    * Will build a file path from the file name passed in (starter code is
+  - `initialize`
+    - Will build a file path from the file name passed in (starter code is
       provided)
-    * Will "parse" the data in the file at the file path according to the CSV
+    - Will "parse" the data in the file at the file path according to the CSV
       format using the Ruby [CSV] library method that reads in a file and
       converts the rows to an `Array` of `Arrays`. Consult the
-      [documentation][CSV] for this method
-    * The parsed CSV data should be available through a reader called
+      [documentation][csv] for this method
+    - The parsed CSV data should be available through a reader called
       `csv_data`
-  * Instance methods
-    * `#common_number_of_trials`: Because the database crashed, we're not sure
+  - Instance methods
+    - `#common_number_of_trials`: Because the database crashed, we're not sure
       how many trials are common to the participants. We need this class to
       tell us the minimum common number of trials. For example: [A, A, A, A, B,
       B, B, B, B, C, C, C] has a common trial of `3` since C has the fewest.
-    * `#least_trials_candidate`: Which candidate had the least, and thus
+    - `#least_trials_candidate`: Which candidate had the least, and thus
       common, number of trials? Returns a `String`
-    * `#most_trials_candidate`: Which candidate had the most trials? Returns a
+    - `#most_trials_candidate`: Which candidate had the most trials? Returns a
       `String`
 
 > **TYPOGRAPHICAL NOTE**: Developer documentation uses `#methodname` to show that
@@ -156,18 +156,18 @@ all of these tests passing.
 
 The DoLS would like for you to determine the following:
 
-1. "Who is the luckiest candidate?" Where:
-  1. "Lucky" is defined as having had a dice roll where the total pips is equal
-     to `7`
-  2. "Luckiest" is defined as having the most "lucky" rolls within a set of
-     size `common_number_of_trials`. We should take as many "lucky" rolls as
-     possible
-    * Example
-     * Gven a common size of 3 (where "L" means "Lucky" and "U" means "Unlucky"):
-      * A has L, L, L, L => [L, L, L] => 3/3 => 100%
-      * B has U, U, U, L => [L, U, U] => 1/3 => 33%
-      * C has U, U, U, U, U, U, U, U, U, L, U, L => [L, L, U] => 66%
-      * "A" is the luckiest!
+1.  "Who is the luckiest candidate?" Where:
+2.  "Lucky" is defined as having had a dice roll where the total pips is equal
+    to `7`
+3.  "Luckiest" is defined as having the most "lucky" rolls within a set of
+    size `common_number_of_trials`. We should take as many "lucky" rolls as
+    possible
+    - Example
+    - Gven a common size of 3 (where "L" means "Lucky" and "U" means "Unlucky"):
+    - A has L, L, L, L => [L, L, L] => 3/3 => 100%
+    - B has U, U, U, L => [L, U, U] => 1/3 => 33%
+    - C has U, U, U, U, U, U, U, U, U, L, U, L => [L, L, U] => 66%
+    - "A" is the luckiest!
 
 The (DoLS) famously asks for new features often, so we want to build this using
 an OO. DoLS have certified that the current code of `Die` and `DiceRoller` are
@@ -178,23 +178,25 @@ break _existing_ functionality. They have given you an existing test suite.
 > You can run the full test suite (including your work to satisfy
 > `luck_analyzer_spec`, by running `rspec` from the Terminal or `learn`).
 
-* Update `Die` so that:
-  * It can be initialized with a permanent value. When a set value is present, all
+- Update `Die` so that:
+
+  - It can be initialized with a permanent value. When a set value is present, all
     calls to the `#roll` instance method return the set value. The permanent
     value should be accessible via a call to `set_value`
-  * It provides a `#random_roll?` method which returns `true` if the `Die`'s
-   roll value is set randomly and `false` if not.
+  - It provides a `#random_roll?` method which returns `true` if the `Die`'s
+    roll value is set randomly and `false` if not.
 
-* Update `DiceRoller` so that:
-  * It can be initialized with an `Array` of `Die`
-  * If it is initialized with an `Array` of `Die`, when the generate_set
+- Update `DiceRoller` so that:
+
+  - It can be initialized with an `Array` of `Die`
+  - If it is initialized with an `Array` of `Die`, when the generate_set
     method is called, it should return the `Array` of the `roll` values of the
     `Die`
-  * It has a `lucky?` method to return `true` if the `Array` of `Die`s' pips
+  - It has a `lucky?` method to return `true` if the `Array` of `Die`s' pips
     total 7, `false` otherwise
 
-* Update `LuckAnalyzer`
-  * Add a method called `luckiest` to return the luckiest participant as
+- Update `LuckAnalyzer`
+  - Add a method called `luckiest` to return the luckiest participant as
     defined above. The DoLS would like the output to be of the form:
     `candidate_name (lucky_percentage[rounded to the nearest whole number])`
     e.g. `"Perry Hotter (43%)"`
@@ -222,7 +224,7 @@ keeping the old tests happy while adding new ones! Congratulations!
 We also guided you through a process of thinking about how to make small
 "cells" of objects collaborate together to make getting answers simpler.
 
-In subsequent lessons we'll be taking a solution to this problem and
+In subsequent lessons, we'll be taking a solution to this problem and
 refactor the code to make it concise, clear, and beautiful. You won't want to
 miss it!
 
@@ -230,5 +232,4 @@ miss it!
 
 - [CSV]
 
-
-[CSV]: https://ruby-doc.org/stdlib-2.0.0/libdoc/csv/rdoc/CSV.html
+[csv]: https://ruby-doc.org/stdlib-2.0.0/libdoc/csv/rdoc/CSV.html
