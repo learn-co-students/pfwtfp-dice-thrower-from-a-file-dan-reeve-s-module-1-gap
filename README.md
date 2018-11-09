@@ -264,6 +264,10 @@ In subsequent lessons, we'll be taking a solution to this problem and
 refactor the code to make it concise, clear, and beautiful. You won't want to
 miss it!
 
+Be sure to run the specs one last time with the `learn` command to make sure your
+tests pass. If everything's OK, a quick `learn submit` will have you on to your
+next lesson!
+
 ## Resources
 
 - [CSV]
