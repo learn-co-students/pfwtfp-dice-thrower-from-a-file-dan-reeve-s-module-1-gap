@@ -37,13 +37,5 @@ describe 'Die Class' do
       test_set = Array.new(100){ @d.roll }
       expect(test_set.all?{ |i| i == HARD_SET_VALUE}).to be_truthy
     end
-
-    it 'has a #random_roll? method that says a Die with a hard set value was not set randomly' do
-      expect(@d.random_roll?).to be_falsy
-    end
-
-    it 'has a #random_roll? method that says a Die witout a hard set value was set randomly' do
-      expect(Die.new(100).random_roll?).to be_truthy
-    end
   end
 end
